@@ -19,5 +19,6 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    latency_pdu_time_stamper.block.yml DESTINATION share/gnuradio/grc/blocks
+    latency_pdu_time_stamper.block.yml
+    latency_tag_timestamp_debug.block.yml DESTINATION share/gnuradio/grc/blocks
 )

@@ -18,37 +18,34 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_LATENCY_PDU_TIME_STAMPER_H
-#define INCLUDED_LATENCY_PDU_TIME_STAMPER_H
+#ifndef INCLUDED_LATENCY_TAG_TIMESTAMP_DEBUG_IMPL_H
+#define INCLUDED_LATENCY_TAG_TIMESTAMP_DEBUG_IMPL_H
 
-#include <gnuradio/sync_block.h>
-#include <latency/api.h>
+#include <latency/tag_timestamp_debug.h>
 
 namespace gr {
 namespace latency {
 
-/*!
- * \brief Add a timestamp to each PDU
- * \ingroup latency
- *
- */
-class LATENCY_API pdu_time_stamper : virtual public gr::sync_block
+class tag_timestamp_debug_impl : public tag_timestamp_debug
 {
-public:
-    typedef boost::shared_ptr<pdu_time_stamper> sptr;
+private:
+    std::string d_name;
+    std::string d_key_name;
+    pmt::pmt_t d_key;
 
-    /*!
-     * \brief Return a shared_ptr to a new instance of latency::pdu_time_stamper.
-     *
-     * To avoid accidental use of raw pointers, latency::pdu_time_stamper's
-     * constructor is in a private implementation
-     * class. latency::pdu_time_stamper::make is the public interface for
-     * creating new instances.
-     */
-    static sptr make(const std::string& key_string);
+public:
+    tag_timestamp_debug_impl(size_t sizeof_stream_item,
+                             const std::string& key_name,
+                             const std::string& name);
+    ~tag_timestamp_debug_impl();
+
+    // Where all the action really happens
+    int work(int noutput_items,
+             gr_vector_const_void_star& input_items,
+             gr_vector_void_star& output_items);
 };
 
 } // namespace latency
 } // namespace gr
 
-#endif /* INCLUDED_LATENCY_PDU_TIME_STAMPER_H */
+#endif /* INCLUDED_LATENCY_TAG_TIMESTAMP_DEBUG_IMPL_H */

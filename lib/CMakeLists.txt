@@ -25,6 +25,7 @@ include(GrPlatform) #define LIB_SUFFIX
 
 list(APPEND latency_sources
     pdu_time_stamper_impl.cc
+    tag_timestamp_debug_impl.cc
 )
 
 set(latency_sources "${latency_sources}" PARENT_SCOPE)

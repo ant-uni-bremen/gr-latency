@@ -1,0 +1,142 @@
+options:
+  parameters:
+    author: Johannes Demel
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: tag_timestamp_demo
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Tag Timestamp demo
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 12]
+    rotation: 0
+    state: enabled
+- name: blocks_message_strobe_0_0
+  id: blocks_message_strobe
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg: pmt.intern("TEST")
+    period: '50'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 124.0]
+    rotation: 0
+    state: enabled
+- name: blocks_pdu_to_tagged_stream_0_1
+  id: blocks_pdu_to_tagged_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    tag: length_tag_name
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [664, 132.0]
+    rotation: 0
+    state: enabled
+- name: blocks_random_pdu_0
+  id: blocks_random_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    length_modulo: '1'
+    mask: '0xFF'
+    maxoutbuf: '0'
+    maxsize: '113'
+    minoutbuf: '0'
+    minsize: '113'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 108.0]
+    rotation: 0
+    state: enabled
+- name: latency_pdu_time_stamper_0
+  id: latency_pdu_time_stamper
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    key_string: '"time"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [464, 132.0]
+    rotation: 0
+    state: enabled
+- name: latency_tag_timestamp_debug_0
+  id: latency_tag_timestamp_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    key_name: '"time"'
+    name: formatter
+    num_inputs: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 124.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_message_strobe_0_0, strobe, blocks_random_pdu_0, generate]
+- [blocks_pdu_to_tagged_stream_0_1, '0', latency_tag_timestamp_debug_0, '0']
+- [blocks_random_pdu_0, pdus, latency_pdu_time_stamper_0, PDUin]
+- [latency_pdu_time_stamper_0, PDUout, blocks_pdu_to_tagged_stream_0_1, pdus]
+
+metadata:
+  file_format: 1

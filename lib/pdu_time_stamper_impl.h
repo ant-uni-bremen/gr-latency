@@ -24,31 +24,28 @@
 #include <latency/pdu_time_stamper.h>
 
 namespace gr {
-  namespace latency {
+namespace latency {
 
-    class pdu_time_stamper_impl : public pdu_time_stamper
-    {
-     private:
-      pmt::pmt_t d_timestamp_key;
-      std::string d_timestamp_str;
+class pdu_time_stamper_impl : public pdu_time_stamper
+{
+private:
+    pmt::pmt_t d_timestamp_key;
+    std::string d_timestamp_str;
 
-     public:
-      pdu_time_stamper_impl(const std::string& key_string);
-      ~pdu_time_stamper_impl();
+public:
+    pdu_time_stamper_impl(const std::string& key_string);
+    ~pdu_time_stamper_impl();
 
-      // Where all the action really happens
-      void handle_msg(pmt::pmt_t pdu);
+    // Where all the action really happens
+    void handle_msg(pmt::pmt_t pdu);
 
-      // A dummy
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
-    };
+    // A dummy
+    int work(int noutput_items,
+             gr_vector_const_void_star& input_items,
+             gr_vector_void_star& output_items);
+};
 
-  } // namespace latency
+} // namespace latency
 } // namespace gr
 
 #endif /* INCLUDED_LATENCY_PDU_TIME_STAMPER_IMPL_H */
-

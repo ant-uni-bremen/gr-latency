@@ -23,5 +23,6 @@
 ########################################################################
 install(FILES
     api.h
-    pdu_time_stamper.h DESTINATION include/latency
+    pdu_time_stamper.h
+    tag_timestamp_debug.h DESTINATION include/latency
 )
