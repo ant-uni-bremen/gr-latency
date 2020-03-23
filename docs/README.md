@@ -1,3 +1,5 @@
+![Check Formatting](https://github.com/ant-uni-bremen/gr-latency/workflows/Check%20Formatting/badge.svg)
+
 # Latency measurements
 
 Sometimes we need to measure latency in a flowgraph. 
