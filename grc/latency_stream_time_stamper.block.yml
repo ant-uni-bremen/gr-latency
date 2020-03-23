@@ -1,10 +1,10 @@
 id: latency_stream_time_stamper
-label: stream_time_stamper
+label: Stream time stamper
 category: '[latency]'
 
 templates:
   imports: import latency
-  make: latency.stream_time_stamper(${sizeof_stream_item}, ${key_string}, ${packet_len})
+  make: latency.stream_time_stamper(${type.size}*${vlen}, ${key_string}, ${packet_len})
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:
@@ -12,12 +12,27 @@ templates:
 #     * label (label shown in the GUI)
 #     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
 parameters:
-- id: ...
-  label: ...
-  dtype: ...
-- id: ...
-  label: ...
-  dtype: ...
+-   id: type
+    label: Input Type
+    dtype: enum
+    options: [complex, float, int, short, byte]
+    option_attributes:
+        size: [gr.sizeof_gr_complex, gr.sizeof_float, gr.sizeof_int, gr.sizeof_short,
+            gr.sizeof_char]
+    hide: part
+-   id: vlen
+    label: Vec Length
+    dtype: int
+    default: '1'
+    hide: ${ 'part' if vlen == 1 else 'none' }
+-   id: key_string
+    label: Key name
+    dtype: string
+    default: '"time"'
+-   id: packet_len
+    label: Packet length
+    dtype: int
+    default: '128'
 
 #  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
 #  Keys include:
@@ -27,18 +42,14 @@ parameters:
 #      * vlen (optional - data stream vector length. Default is 1)
 #      * optional (optional - set to 1 for optional inputs. Default is 0)
 inputs:
-- label: ...
-  domain: ...
-  dtype: ...
-  vlen: ...
-  optional: ...
+- domain: stream
+  dtype: ${ type }
+  vlen: ${ vlen }
 
 outputs:
-- label: ...
-  domain: ...
-  dtype: ...
-  vlen: ...
-  optional: ...
+- domain: stream
+  dtype: ${ type }
+  vlen: ${ vlen }
 
 #  'file_format' specifies the version of the GRC yml format used in the file
 #  and should usually not be changed.

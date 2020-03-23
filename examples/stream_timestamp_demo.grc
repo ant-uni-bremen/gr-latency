@@ -44,61 +44,66 @@ blocks:
     coordinate: [184, 12]
     rotation: 0
     state: enabled
-- name: blocks_message_strobe_0_0
-  id: blocks_message_strobe
+- name: analog_fastnoise_source_x_0
+  id: analog_fastnoise_source_x
   parameters:
     affinity: ''
     alias: ''
+    amp: '1'
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    msg: pmt.intern("TEST")
-    period: '50'
+    noise_type: analog.GR_GAUSSIAN
+    samples: '8192'
+    seed: '0'
+    type: float
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [48, 124.0]
+    coordinate: [96, 164.0]
     rotation: 0
-    state: enabled
-- name: blocks_pdu_to_tagged_stream_0_1
-  id: blocks_pdu_to_tagged_stream
+    state: true
+- name: blocks_tag_debug_0
+  id: blocks_tag_debug
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    tag: length_tag_name
-    type: byte
+    display: 'True'
+    filter: '""'
+    name: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 132.0]
+    coordinate: [736, 220.0]
     rotation: 0
-    state: enabled
-- name: blocks_random_pdu_0
-  id: blocks_random_pdu
+    state: true
+- name: blocks_throttle_0
+  id: blocks_throttle
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    length_modulo: '1'
-    mask: '0xFF'
+    ignoretag: 'True'
     maxoutbuf: '0'
-    maxsize: '113'
     minoutbuf: '0'
-    minsize: '113'
+    samples_per_second: samp_rate
+    type: float
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 108.0]
+    coordinate: [304, 188.0]
     rotation: 0
-    state: enabled
-- name: latency_pdu_time_stamper_0
-  id: latency_pdu_time_stamper
+    state: true
+- name: latency_stream_time_stamper_0
+  id: latency_stream_time_stamper
   parameters:
     affinity: ''
     alias: ''
@@ -106,37 +111,40 @@ blocks:
     key_string: '"time"'
     maxoutbuf: '0'
     minoutbuf: '0'
+    packet_len: '2048'
+    type: float
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [464, 132.0]
+    coordinate: [480, 180.0]
     rotation: 0
-    state: enabled
-- name: latency_tag_timestamp_debug_0
+    state: true
+- name: latency_tag_timestamp_debug_0_0
   id: latency_tag_timestamp_debug
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     key_name: '"time"'
-    name: formatter
+    name: streamdemo
     num_inputs: '1'
-    type: byte
+    type: float
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 124.0]
+    coordinate: [736, 148.0]
     rotation: 0
     state: enabled
 
 connections:
-- [blocks_message_strobe_0_0, strobe, blocks_random_pdu_0, generate]
-- [blocks_pdu_to_tagged_stream_0_1, '0', latency_tag_timestamp_debug_0, '0']
-- [blocks_random_pdu_0, pdus, latency_pdu_time_stamper_0, PDUin]
-- [latency_pdu_time_stamper_0, PDUout, blocks_pdu_to_tagged_stream_0_1, pdus]
+- [analog_fastnoise_source_x_0, '0', blocks_throttle_0, '0']
+- [blocks_throttle_0, '0', latency_stream_time_stamper_0, '0']
+- [latency_stream_time_stamper_0, '0', blocks_tag_debug_0, '0']
+- [latency_stream_time_stamper_0, '0', latency_tag_timestamp_debug_0_0, '0']
 
 metadata:
   file_format: 1

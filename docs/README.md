@@ -13,6 +13,10 @@ We add a timestamp to a packet. Either in a PDU or with other means. The trick i
 `const auto ticks = std::chrono::high_resolution_clock::now().time_since_epoch()`<br>
 which represents our timestamp. Further down the processing chain, we can pick up this tag and analyze the time difference. This might give us a pretty consistent idea where we spend most of our latency.
 
+## Issues
+
+* All data is printed to `stdout`. Instead, we should use GNU Radio's logging capabilities.
+* Debug data should contain a common identifier, preferably the timestamp itself to identify different propagation stages of the same packet.
 
 ## Code formatting
 This is the current way to format everything:<br>
