@@ -10,9 +10,12 @@
 %{
 #include "latency/pdu_time_stamper.h"
 #include "latency/tag_timestamp_debug.h"
+#include "latency/stream_time_stamper.h"
 %}
 
 %include "latency/pdu_time_stamper.h"
 GR_SWIG_BLOCK_MAGIC2(latency, pdu_time_stamper);
 %include "latency/tag_timestamp_debug.h"
 GR_SWIG_BLOCK_MAGIC2(latency, tag_timestamp_debug);
+%include "latency/stream_time_stamper.h"
+GR_SWIG_BLOCK_MAGIC2(latency, stream_time_stamper);

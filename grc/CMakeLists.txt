@@ -20,5 +20,6 @@
 
 install(FILES
     latency_pdu_time_stamper.block.yml
-    latency_tag_timestamp_debug.block.yml DESTINATION share/gnuradio/grc/blocks
+    latency_tag_timestamp_debug.block.yml
+    latency_stream_time_stamper.block.yml DESTINATION share/gnuradio/grc/blocks
 )
