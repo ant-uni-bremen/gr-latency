@@ -13,6 +13,10 @@ We add a timestamp to a packet. Either in a PDU or with other means. The trick i
 `const auto ticks = std::chrono::high_resolution_clock::now().time_since_epoch()`<br>
 which represents our timestamp. Further down the processing chain, we can pick up this tag and analyze the time difference. This might give us a pretty consistent idea where we spend most of our latency.
 
+### Inspiration
+
+This module was inspired by [a comment in gr-sched](https://github.com/bastibl/gr-sched#metrics).
+
 ## Issues
 
 * All data is printed to `stdout`. Instead, we should use GNU Radio's logging capabilities.
