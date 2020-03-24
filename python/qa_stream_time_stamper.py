@@ -23,6 +23,7 @@ from gnuradio import gr, gr_unittest
 from gnuradio import blocks
 import latency_swig as latency
 
+
 class qa_stream_time_stamper(gr_unittest.TestCase):
 
     def setUp(self):

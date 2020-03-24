@@ -119,8 +119,8 @@ def string_to_int_list(s):
 
 def hex_string_to_int_list(s):
     s = s.replace(" ", "")
-    l = map(''.join, zip(*[iter(s)]*2))
-    h = [''.join(['0x', i, ]) for i in l]
+    sl = map(''.join, zip(*[iter(s)]*2))
+    h = [''.join(['0x', i, ]) for i in sl]
     il = [int(i, 16) for i in h]
     return il
 
@@ -141,7 +141,8 @@ def main():
     meta = set_pdu_header_checksum(meta, checksum)
     print(meta)
 
-    K = "00010203 04050607 08090A0B 0C0D0E0F 10111213 14151617 18191A1B 1C1D1E1F"
+    K = "00010203 04050607 08090A0B 0C0D0E0F "
+    K += "10111213 14151617 18191A1B 1C1D1E1F"
     print(K)
     vals = hex_string_to_int_list(K)
     print(get_hex_char_string(vals))

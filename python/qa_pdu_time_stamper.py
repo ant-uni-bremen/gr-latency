@@ -34,9 +34,6 @@ class qa_pdu_time_stamper(gr_unittest.TestCase):
         self.tb = None
 
     def test_001_t(self):
-        src_id = 21
-        dst_id = 10
-        direction = True  # Downlink
         msg = u"Sample message for frame formatter Yihhaaa"
         message = string_to_int_list(msg)
         payload = get_pdu_payload(message)
@@ -52,7 +49,9 @@ class qa_pdu_time_stamper(gr_unittest.TestCase):
         self.tb.msg_connect(formatter, "PDUout", dbg, "print_pdu")
 
         self.tb.start()
-        formatter.to_basic_block()._post(pmt.intern("PDUin"), pdu)  # eww, what's that smell?
+        # eww, what's that smell?
+        formatter.to_basic_block()._post(pmt.intern("PDUin"),
+                                         pdu)
         while dbg.num_messages() < 1:
             pass
         self.tb.stop()
@@ -62,8 +61,11 @@ class qa_pdu_time_stamper(gr_unittest.TestCase):
         print('finished test')
         # print(result_msg)
         meta = pmt.car(result_msg)
-        bits = pmt.cdr(result_msg)
+        # bits = pmt.cdr(result_msg)
         print(meta)
+        t = pmt.dict_ref(meta, pmt.intern('time'), pmt.PMT_NIL)
+        self.assertFalse(t == pmt.PMT_NIL)
+        print(t)
 
 
 if __name__ == '__main__':

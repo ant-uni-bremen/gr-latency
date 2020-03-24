@@ -38,8 +38,6 @@ class qa_tag_timestamp_debug(gr_unittest.TestCase):
         # ref = []
         nt = int(time.time() * 1e9)
         for i in range(5):
-            r = 1. * i
-            # ref.append(r)
             d = [i * 500, pmt.intern('time'), pmt.from_long(nt),
                  pmt.intern('testsource')]
             t = gr.tag_utils.python_to_tag(d)
