@@ -25,6 +25,7 @@
 #include "tag_timestamp_debug_impl.h"
 #include <gnuradio/io_signature.h>
 #include <chrono>
+#include <string>
 
 namespace gr {
 namespace latency {
@@ -82,9 +83,10 @@ int tag_timestamp_debug_impl::work(int noutput_items,
             }
             auto cn = std::chrono::high_resolution_clock::now().time_since_epoch();
             auto d = std::chrono::duration_cast<std::chrono::nanoseconds>(cn - s);
-            // FIXME: Add timestamp for correct clustering!
-            // FIXME: Use GR Logger for thread safety fanciness!
-            std::cout << d_name << " duration: " << d.count() << "ns" << std::endl;
+
+            GR_LOG_INFO(this->d_logger,
+                        std::to_string(s.count()) + ", " + d_name + ", " +
+                            std::to_string(d.count()) + ",");
         }
     }
 
