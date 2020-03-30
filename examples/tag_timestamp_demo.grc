@@ -44,6 +44,23 @@ blocks:
     coordinate: [184, 12]
     rotation: 0
     state: enabled
+- name: blocks_char_to_float_0
+  id: blocks_char_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 252.0]
+    rotation: 0
+    state: true
 - name: blocks_message_strobe_0_0
   id: blocks_message_strobe
   parameters:
@@ -53,7 +70,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     msg: pmt.intern("TEST")
-    period: '50'
+    period: '1'
   states:
     bus_sink: false
     bus_source: false
@@ -131,9 +148,29 @@ blocks:
     coordinate: [928, 124.0]
     rotation: 0
     state: enabled
+- name: latency_tag_timestamp_debug_0_0
+  id: latency_tag_timestamp_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    key_name: '"time"'
+    name: float
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1032, 244.0]
+    rotation: 0
+    state: enabled
 
 connections:
+- [blocks_char_to_float_0, '0', latency_tag_timestamp_debug_0_0, '0']
 - [blocks_message_strobe_0_0, strobe, blocks_random_pdu_0, generate]
+- [blocks_pdu_to_tagged_stream_0_1, '0', blocks_char_to_float_0, '0']
 - [blocks_pdu_to_tagged_stream_0_1, '0', latency_tag_timestamp_debug_0, '0']
 - [blocks_random_pdu_0, pdus, latency_pdu_time_stamper_0, PDUin]
 - [latency_pdu_time_stamper_0, PDUout, blocks_pdu_to_tagged_stream_0_1, pdus]
