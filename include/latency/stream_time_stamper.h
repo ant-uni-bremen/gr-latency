@@ -35,7 +35,7 @@ namespace latency {
 class LATENCY_API stream_time_stamper : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<stream_time_stamper> sptr;
+    typedef std::shared_ptr<stream_time_stamper> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of latency::stream_time_stamper.

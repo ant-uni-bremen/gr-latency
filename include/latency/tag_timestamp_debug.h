@@ -35,7 +35,7 @@ namespace latency {
 class LATENCY_API tag_timestamp_debug : virtual public gr::sync_block
 {
 public:
-    typedef boost::shared_ptr<tag_timestamp_debug> sptr;
+    typedef std::shared_ptr<tag_timestamp_debug> sptr;
 
     /*!
      * \brief Return a shared_ptr to a new instance of latency::tag_timestamp_debug.
