@@ -4,7 +4,7 @@ category: '[latency]'
 
 templates:
   imports: import latency
-  make: latency.pdu_time_stamper(${key_string})
+  make: latency.pdu_time_stamper(${key_string}, ${name})
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:
@@ -15,6 +15,10 @@ parameters:
 - id: key_string
   label: Key string
   dtype: string
+-   id: name
+    label: Name
+    dtype: string
+    default: '"pdu timestamp debug"'
 
 #  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
 #  Keys include:

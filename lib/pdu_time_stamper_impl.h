@@ -31,9 +31,10 @@ class pdu_time_stamper_impl : public pdu_time_stamper
 private:
     pmt::pmt_t d_timestamp_key;
     std::string d_timestamp_str;
+    std::string d_log_name;
 
 public:
-    pdu_time_stamper_impl(const std::string& key_string);
+    pdu_time_stamper_impl(const std::string& key_string, const std::string& name);
     ~pdu_time_stamper_impl();
 
     // Where all the action really happens

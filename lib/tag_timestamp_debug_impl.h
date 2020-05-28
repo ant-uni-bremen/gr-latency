@@ -29,7 +29,7 @@ namespace latency {
 class tag_timestamp_debug_impl : public tag_timestamp_debug
 {
 private:
-    std::string d_name;
+    std::string d_log_name;
     std::string d_key_name;
     pmt::pmt_t d_key;
 

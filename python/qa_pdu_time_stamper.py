@@ -42,7 +42,7 @@ class qa_pdu_time_stamper(gr_unittest.TestCase):
 
         pdu = pmt.cons(meta, payload)
 
-        formatter = latency.pdu_time_stamper("time")
+        formatter = latency.pdu_time_stamper("time", "pdu_timestamp_debug")
         dbg = blocks.message_debug()
 
         self.tb.msg_connect(formatter, "PDUout", dbg, "store")

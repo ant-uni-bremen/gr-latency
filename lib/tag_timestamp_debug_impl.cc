@@ -48,7 +48,7 @@ tag_timestamp_debug_impl::tag_timestamp_debug_impl(size_t sizeof_stream_item,
     : gr::sync_block("tag_timestamp_debug",
                      gr::io_signature::make(1, -1, sizeof_stream_item),
                      gr::io_signature::make(0, 0, 0)),
-      d_name(name),
+      d_log_name(name),
       d_key_name(key_name),
       d_key(pmt::string_to_symbol(key_name))
 {
@@ -70,8 +70,6 @@ int tag_timestamp_debug_impl::work(int noutput_items,
         std::vector<tag_t> tags;
         get_tags_in_range(tags, i, abs_N, end_N);
         for (auto t : tags) {
-            // std::cout << d_name << " ";
-            // pmt::print(t.value);
             std::chrono::nanoseconds s;
             if (t.key == d_key) {
                 s = std::chrono::nanoseconds(pmt::to_long(t.value));
@@ -85,7 +83,7 @@ int tag_timestamp_debug_impl::work(int noutput_items,
             auto d = std::chrono::duration_cast<std::chrono::nanoseconds>(cn - s);
 
             GR_LOG_INFO(this->d_logger,
-                        std::to_string(s.count()) + ", " + d_name + ", " +
+                        std::to_string(s.count()) + ", " + d_log_name + ", " +
                             std::to_string(d.count()) + ",");
         }
     }

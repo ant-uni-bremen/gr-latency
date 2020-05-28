@@ -45,7 +45,7 @@ public:
      * class. latency::pdu_time_stamper::make is the public interface for
      * creating new instances.
      */
-    static sptr make(const std::string& key_string);
+    static sptr make(const std::string& key_string, const std::string& name);
 };
 
 } // namespace latency
