@@ -22,7 +22,7 @@
 from gnuradio import gr, gr_unittest
 from gnuradio import blocks
 import pmt
-import latency_swig as latency
+import latency_python as latency
 from utils import string_to_int_list, get_pdu_payload
 
 

@@ -23,7 +23,7 @@ from gnuradio import gr, gr_unittest
 from gnuradio import blocks
 import pmt
 import time
-import latency_swig as latency
+import latency_python as latency
 
 
 class qa_tag_timestamp_debug(gr_unittest.TestCase):
