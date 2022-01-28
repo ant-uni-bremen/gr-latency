@@ -58,7 +58,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 252.0]
+    coordinate: [920, 340.0]
     rotation: 0
     state: true
 - name: blocks_message_strobe_0_0
@@ -92,7 +92,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 132.0]
+    coordinate: [688, 140.0]
     rotation: 0
     state: enabled
 - name: blocks_random_pdu_0
@@ -111,7 +111,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 108.0]
+    coordinate: [232, 116.0]
     rotation: 0
     state: enabled
 - name: latency_pdu_time_stamper_0
@@ -123,6 +123,7 @@ blocks:
     key_string: '"time"'
     maxoutbuf: '0'
     minoutbuf: '0'
+    name: '"pdu timestamp debug"'
   states:
     bus_sink: false
     bus_source: false
@@ -145,7 +146,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [928, 124.0]
+    coordinate: [936, 132.0]
     rotation: 0
     state: enabled
 - name: latency_tag_timestamp_debug_0_0
@@ -163,7 +164,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 244.0]
+    coordinate: [1064, 332.0]
     rotation: 0
     state: enabled
 

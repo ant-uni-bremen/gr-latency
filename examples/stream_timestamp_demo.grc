@@ -80,7 +80,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 220.0]
+    coordinate: [680, 268.0]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -99,7 +99,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 188.0]
+    coordinate: [320, 188.0]
     rotation: 0
     state: true
 - name: latency_stream_time_stamper_0
@@ -136,7 +136,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 148.0]
+    coordinate: [688, 180.0]
     rotation: 0
     state: enabled
 

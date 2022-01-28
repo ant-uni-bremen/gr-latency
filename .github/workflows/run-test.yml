@@ -2,17 +2,48 @@ name: Run CI tests
 
 on: [push, pull_request]
 
+
 jobs:
-  build-ubuntu:
+  build-ubuntu-gnuradio-latest:
 
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2.4.0
     - name: Add GNU Radio PPA
-      run: sudo add-apt-repository ppa:gnuradio/gnuradio-master && sudo apt update
+      run: sudo add-apt-repository ppa:gnuradio/gnuradio-releases && sudo apt update
     - name: dependencies
-      run: sudo apt install gnuradio python3-uhd python3-pybind11 liborc-0.4-dev
+      run: >
+        sudo apt install gnuradio python3-uhd python3-pybind11 liborc-0.4-dev
+        libspdlog-dev libsndfile1-dev
+        && sudo pip3 install pygccxml pyqtgraph
+    - name: Print configuration
+      run: |
+        uname -a
+        gnuradio-config-info --print-all
+    - name: configure
+      run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror" ..
+    - name: build
+      run: cmake --build build
+    - name: test
+      run: cd build && ctest -V
+
+  build-ubuntu-gnuradio-39:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2.4.0
+    - name: Add GNU Radio PPA
+      run: sudo add-apt-repository ppa:gnuradio/gnuradio-releases-3.9 && sudo apt update
+    - name: dependencies
+      run: >
+        sudo apt install gnuradio python3-uhd python3-pybind11 liborc-0.4-dev libsndfile1-dev
+        && sudo pip3 install pygccxml pyqtgraph
+    - name: Print configuration
+      run: |
+        uname -a
+        gnuradio-config-info --print-all
     - name: configure
       run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror" ..
     - name: build
