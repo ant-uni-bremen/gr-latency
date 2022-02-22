@@ -51,11 +51,11 @@ if((CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
 endif()
 
 IF(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    SET(CMAKE_CXX_STANDARD 11)
+    SET(CMAKE_CXX_STANDARD 17)
 ELSEIF(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    SET(CMAKE_CXX_STANDARD 11)
+    SET(CMAKE_CXX_STANDARD 17)
 ELSEIF(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    SET(CMAKE_CXX_STANDARD 11)
+    SET(CMAKE_CXX_STANDARD 17)
 ELSE()
     message(WARNING "C++ standard could not be set because compiler is not GNU, Clang or MSVC.")
 ENDIF()
@@ -113,6 +113,7 @@ endif(APPLE)
 # Find gnuradio build dependencies
 ########################################################################
 find_package(Doxygen)
+find_package(fmt REQUIRED)
 
 ########################################################################
 # PyBind11 Related

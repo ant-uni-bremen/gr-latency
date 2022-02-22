@@ -24,7 +24,7 @@ if(NOT latency_sources)
 endif(NOT latency_sources)
 
 add_library(gnuradio-latency SHARED ${latency_sources})
-target_link_libraries(gnuradio-latency gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-latency gnuradio::gnuradio-runtime fmt::fmt)
 target_include_directories(gnuradio-latency
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>

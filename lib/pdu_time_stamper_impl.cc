@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2020 Johannes Demel.
+ * Copyright 2020, 2022 Johannes Demel.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 
 #include "pdu_time_stamper_impl.h"
 #include <gnuradio/io_signature.h>
+#include <fmt/core.h>
 #include <chrono>
 
 namespace gr {
@@ -76,8 +77,7 @@ void pdu_time_stamper_impl::handle_msg(pmt::pmt_t pdu)
             pmt::to_long(pmt::dict_ref(meta, d_timestamp_key, pmt::PMT_NIL)));
         const auto d = std::chrono::duration_cast<std::chrono::nanoseconds>(ticks - s);
         GR_LOG_INFO(this->d_logger,
-                    std::to_string(s.count()) + ", " + d_log_name + ", " +
-                        std::to_string(d.count()) + ",");
+                    fmt::format("{}, {}, {},", s.count(), d_log_name, d.count()));
     } else {
         meta = pmt::dict_add(meta, d_timestamp_key, pmt::from_long(ticks.count()));
     }
