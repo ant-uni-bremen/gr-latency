@@ -1,0 +1,24 @@
+{
+    "title": "gr-latency",
+    "description": "The *gr-latency* project is a Free Software Package which aims to provide tools to measure flowgraph latency. This module was inspired by [a comment in gr-sched](https://github.com/bastibl/gr-sched#metrics).",
+    "license": {
+        "id": "GPL-3.0-or-later"
+    },
+    "keywords": [
+        "communication",
+        "software radio",
+        "SDR",
+        "C++",
+        "GNU Radio",
+        "Python",
+        "latency",
+        "measurement"
+    ],
+    "creators": [
+        {
+            "affiliation": "Department of Communications Engineering, University of Bremen, Germany",
+            "name": "Demel, Johannes",
+            "orcid": "0000-0002-5434-7232"
+        }
+    ]
+}
