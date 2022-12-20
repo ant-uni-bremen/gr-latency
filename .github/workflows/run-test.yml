@@ -38,7 +38,7 @@ jobs:
       run: cd build && ctest -V
 
   build-ubuntu-gnuradio-39:
-    name: Build w/ GR 3.3 on ubuntu-20.04
+    name: Build w/ GR 3.9 on ubuntu-20.04
     runs-on: ubuntu-20.04
 
     steps:

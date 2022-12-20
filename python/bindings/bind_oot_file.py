@@ -13,7 +13,7 @@ parser.add_argument('--output_dir', default='/tmp',
                     help='Output directory of generated bindings')
 parser.add_argument('--prefix', help='Prefix of Installed GNU Radio')
 parser.add_argument('--src', help='Directory of gnuradio source tree',
-                    default=os.path.dirname(os.path.abspath(__file__))+'/../../..')
+                    default=os.path.dirname(os.path.abspath(__file__)) + '/../../..')
 
 parser.add_argument(
     '--filename', help="File to be parsed")

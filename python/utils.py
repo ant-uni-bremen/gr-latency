@@ -119,7 +119,7 @@ def string_to_int_list(s):
 
 def hex_string_to_int_list(s):
     s = s.replace(" ", "")
-    sl = map(''.join, zip(*[iter(s)]*2))
+    sl = map(''.join, zip(*[iter(s)] * 2))
     h = [''.join(['0x', i, ]) for i in sl]
     il = [int(i, 16) for i in h]
     return il
