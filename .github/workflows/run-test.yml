@@ -5,13 +5,22 @@ on: [push, pull_request]
 
 jobs:
   build-ubuntu-gnuradio-latest:
-
-    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - ubuntu-20.04
+          - ubuntu-22.04
+    
+    name: Build w/ GR 3.10 on ${{ matrix.distro }}
+    runs-on: ${{ matrix.distro }}
 
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.1.0
     - name: Add GNU Radio PPA
-      run: sudo add-apt-repository ppa:gnuradio/gnuradio-releases && sudo apt update
+      run: |
+        sudo add-apt-repository ppa:gnuradio/gnuradio-releases
+        sudo apt update
     - name: dependencies
       run: >
         sudo apt install gnuradio python3-uhd python3-pybind11 liborc-0.4-dev
@@ -24,18 +33,20 @@ jobs:
     - name: configure
       run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror" ..
     - name: build
-      run: cmake --build build
+      run: cmake --build build -j2
     - name: test
       run: cd build && ctest -V
 
   build-ubuntu-gnuradio-39:
-
+    name: Build w/ GR 3.3 on ubuntu-20.04
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.1.0
     - name: Add GNU Radio PPA
-      run: sudo add-apt-repository ppa:gnuradio/gnuradio-releases-3.9 && sudo apt update
+      run: |
+        sudo add-apt-repository ppa:gnuradio/gnuradio-releases-3.9
+        sudo apt update
     - name: dependencies
       run: >
         sudo apt install gnuradio python3-uhd python3-pybind11 liborc-0.4-dev libfmt-dev libsndfile1-dev
@@ -47,6 +58,6 @@ jobs:
     - name: configure
       run: mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Werror" ..
     - name: build
-      run: cmake --build build
+      run: cmake --build build -j2
     - name: test
       run: cd build && ctest -V

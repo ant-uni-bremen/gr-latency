@@ -9,13 +9,23 @@ on:
       - 'swig/'
 
 jobs:
-  build:
+  check-cpp-formatting:
+    name: Check C++ formatting
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: gnuradio/clang-format-lint-action@v0.5-4
       with:
         source: '.'
         exclude: './swig'
         extensions: 'c,cc,cpp,cxx,h,hh'
+
+  check-python-formatting:
+    name: Check Python Formatting
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3.1.0
+    - uses: quentinguidee/pep8-action@v1
+      with:
+        arguments: '--max-line-length=120 --ignore E203,E265,E266,E402,E501,E704,E712,E713,E714,E711,E722,E741,W503,W504,W605 --exclude *.yml.py'

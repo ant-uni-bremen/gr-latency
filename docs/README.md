@@ -1,9 +1,8 @@
-![Check Formatting](https://github.com/ant-uni-bremen/gr-latency/workflows/Check%20Formatting/badge.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6338010.svg)](https://doi.org/10.5281/zenodo.6338010) ![Check Formatting](https://github.com/ant-uni-bremen/gr-latency/workflows/Check%20Formatting/badge.svg)
 
 # Latency measurements
 
-Sometimes we need to measure latency in a flowgraph.
-
+The *gr-latency* GNU Radio Out-of-Tree module is a Free Software Package that aims to provide tools to measure flowgraph latency. The module provides features to measure GNU Radio flowgraph latency, e.g.:
 * Which blocks delay processing?
 * How long does it take a packet to propagate through the DSP chain?
 
@@ -15,7 +14,9 @@ which represents our timestamp. Further down the processing chain, we can pick u
 
 ### Inspiration
 
-This module was inspired by [a comment in gr-sched](https://github.com/bastibl/gr-sched#metrics).
+* This module was inspired by [a comment in gr-sched](https://github.com/bastibl/gr-sched#metrics).
+
+* Bloessl, Müller, Hollick: ["Benchmarking and Profiling the GNU Radio Scheduler"](https://pubs.gnuradio.org/index.php/grcon/article/view/64), GNU Radio Conference (GRCon), September 2019, Huntsville, AL, USA
 
 ## Issues
 

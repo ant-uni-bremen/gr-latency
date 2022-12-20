@@ -1,6 +1,5 @@
 {
     "title": "gr-latency",
-    "description": "The *gr-latency* project is a Free Software Package which aims to provide tools to measure flowgraph latency. This module was inspired by [a comment in gr-sched](https://github.com/bastibl/gr-sched#metrics).",
     "license": {
         "id": "GPL-3.0-or-later"
     },
@@ -13,6 +12,23 @@
         "Python",
         "latency",
         "measurement"
+    ],
+    "related_identifiers": [
+        {
+            "identifier": "https://github.com/ant-uni-bremen/gr-latency",
+            "relation": "isSupplementTo",
+            "resource_type": "software"
+        },
+        {
+            "identifier": "https://github.com/bastibl/gr-sched#metrics",
+            "relation": "references",
+            "resource_type": "publication-other"
+        },
+        {
+            "identifier": "https://pubs.gnuradio.org/index.php/grcon/article/view/64",
+            "relation": "references",
+            "resource_type": "publication-conferencepaper"
+        }
     ],
     "creators": [
         {
