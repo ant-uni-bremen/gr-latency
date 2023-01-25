@@ -19,6 +19,8 @@
 # Boston, MA 02110-1301, USA.
 #
 
+import sys
+import unittest
 from gnuradio import gr, gr_unittest
 from gnuradio import blocks
 import pmt
@@ -26,6 +28,7 @@ import time
 import latency_python as latency
 
 
+@unittest.skipIf(sys.platform.startswith("win"), "Does not work on Windows.")
 class qa_tag_timestamp_debug(gr_unittest.TestCase):
     def setUp(self):
         self.tb = gr.top_block()
@@ -38,18 +41,22 @@ class qa_tag_timestamp_debug(gr_unittest.TestCase):
         # ref = []
         nt = int(time.time() * 1e9)
         for i in range(5):
-            d = [i * 500, pmt.intern('time'), pmt.from_long(nt),
-                 pmt.intern('testsource')]
+            d = [
+                i * 500,
+                pmt.intern("time"),
+                pmt.from_long(nt),
+                pmt.intern("testsource"),
+            ]
             t = gr.tag_utils.python_to_tag(d)
             tags.append(t)
 
         debugger = latency.tag_timestamp_debug(8, "time", "tester")
-        src = blocks.vector_source_c([0.j] * 10000, False, 1, tags)
+        src = blocks.vector_source_c([0.0j] * 10000, False, 1, tags)
         self.tb.connect(src, debugger)
         # set up fg
         self.tb.run()
         # check data
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     gr_unittest.run(qa_tag_timestamp_debug)
